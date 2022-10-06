@@ -21,12 +21,12 @@ public class CursoSpringRepositoryImpl implements ICursoSpringRepositoryJDBC{
 	public List<MarcaDTO> getMarcas() {
 		List<MarcaDTO> ltMarcas = null;
 
-		ltMarcas = jdbcTemplate.query("SELECT * FROM FRO MARCAS", (rs, rowNum)->
-		new MarcaDTO(
-				rs.getLong("ID"),
-				rs.getString("NOMBRE")
-				)
-				);
+//		ltMarcas = jdbcTemplate.query("SELECT * FROM FRO MARCAS", (rs, rowNum)->
+//		new MarcaDTO(
+//				rs.getLong("ID"),
+//				rs.getString("NOMBRE")
+//				)
+//				);
 		return ltMarcas;
 	}
 
