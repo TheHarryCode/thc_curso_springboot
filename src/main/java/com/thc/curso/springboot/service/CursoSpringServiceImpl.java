@@ -21,6 +21,8 @@ public class CursoSpringServiceImpl implements ICursoSpringService{
 	@Autowired
 	ICursoSpringRepositoryJPA repoJpa;
 
+	String resp = "Harry";
+	
 	// Using JPA
 	@Override
 	public List<MarcaDTO> getMarcas(String token) {

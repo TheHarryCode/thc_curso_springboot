@@ -25,11 +25,16 @@ import com.thc.curso.springboot.model.MarcaDTO;
 import com.thc.curso.springboot.model.RequestMarcas;
 import com.thc.curso.springboot.model.ResponseGeneric;
 import com.thc.curso.springboot.service.ICursoSpringService;
-
+// CTRL + L
 @RestController
 @RequestMapping("/service")
 public class CursoSpringController {
 
+	//Reorder the modifiers to comply with the Java Language Specification.
+	private static final String NAME_USER = "HARRY";
+	
+	//ALT + ENTER
+	
 	@Autowired
 	ICursoSpringService service;
 
@@ -41,11 +46,11 @@ public class CursoSpringController {
 	public MarcaDTO uploadFile(@RequestParam("file") MultipartFile file) {
 		return MarcaDTO.builder().idMarca(100L).nombreMarca("You successfully uploaded ").build();
 	}
-	
+
 	//GET --> Obtener
 	@GetMapping("/getMarcas")
 	@ResponseStatus(HttpStatus.OK)
-	public List<MarcaDTO> getMarcas(@RequestHeader("Autorizador") String token){
+	public List<MarcaDTO> getMarcas(@RequestHeader("Autorizador") String token){		
 		return service.getMarcas(token);
 	}
 
@@ -61,20 +66,16 @@ public class CursoSpringController {
 
 	@GetMapping("/getMarcaxId/{idMarca}")
 	public ResponseEntity<MarcaDTO> getMarcaxId(@PathVariable Long idMarca){
-		MarcaDTO response = service.getMarcaxId(idMarca);
+		service.getMarcaxId(idMarca);
 
-		if(response == null) {
-			return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-		}else {
-			return new ResponseEntity<>(response, HttpStatus.OK);
-		}
-
+		return new ResponseEntity<>(new MarcaDTO(), HttpStatus.OK);
 	}
 
 	//POST --> Insertar
 	@PostMapping("/saveMarca")
 	@ResponseStatus(HttpStatus.CREATED)
 	public MarcaDTO save(@RequestBody MarcaDTO request) {
+		request.setNombreMarca(NAME_USER);
 		return service.saveMarca(request);
 	}
 
@@ -92,7 +93,7 @@ public class CursoSpringController {
 		return service.updateMarca(request);
 	}
 
-	//DELETE --> Eliminar
+//	DELETE --> Eliminar
 	@DeleteMapping("/deleteMarca/{idMarca}")
 	public ResponseEntity<String> delete(@PathVariable Long idMarca) {		
 		String resp = service.deleteMarca(idMarca);
@@ -102,6 +103,9 @@ public class CursoSpringController {
 			return new ResponseEntity<>(resp, HttpStatus.NOT_FOUND);
 		}
 	}
+
+	//CTRL + SHIT + X = PONER EN MAYUSCULA
+	//CTRL + SHIT + Y = poner en miniscula
 
 	@DeleteMapping("/deleteMarcas")
 	public ResponseEntity<String> deleteMarcas() {		
@@ -113,18 +117,8 @@ public class CursoSpringController {
 		}
 	}
 
-	//	@DeleteMapping("/deleteMarca/{idMarca}")
-	//	public ResponseEntity<String> delete(@PathVariable Long idMarca) {
-	//		if(idMarca==1L) {
-	//			return new ResponseEntity<>("DATO INVALIDO", HttpStatus.BAD_REQUEST);
-	//		}
-	//		
-	//		if(idMarca>3L) {
-	//			return new ResponseEntity<>("NO EXISTE", HttpStatus.NOT_FOUND);
-	//		}else {
-	//			return new ResponseEntity<>("OK", HttpStatus.NO_CONTENT);
-	//		}
-	//	}
 
 
-}
+}		
+
+

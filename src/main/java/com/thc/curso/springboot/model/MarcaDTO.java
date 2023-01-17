@@ -6,7 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
+import org.hibernate.annotations.Where;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "MARCAS")
+@Where(clause = "creador = 'Harry'")
 @Builder
 public class MarcaDTO {
 
@@ -29,7 +31,7 @@ public class MarcaDTO {
 	@Column(name = "NOMBRE")
 	private String nombreMarca;
 	
-	@Transient
-	private String user;
+	@Column(name = "CREADOR")
+	private String creador;
 	
 }
