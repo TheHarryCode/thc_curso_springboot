@@ -1,5 +1,7 @@
 package com.thc.curso.springboot.service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,17 +17,23 @@ import com.thc.curso.springboot.repository.ICursoSpringRepositoryJDBC;
 @Service
 public class CursoSpringServiceImpl implements ICursoSpringService{
 
+	/**
+	 *
+	 */
+	private static final String TRANSACCION_EXITOSA = "OK";
+
 	@Autowired
 	ICursoSpringRepositoryJDBC repoJdbc;
 
 	@Autowired
 	ICursoSpringRepositoryJPA repoJpa;
 
-	String resp = "Harry";
-	
-	// Using JPA
 	@Override
 	public List<MarcaDTO> getMarcas(String token) {
+		String tipoToken = "Beaver";
+		if(!token.contains(tipoToken)){
+			return Collections.emptyList();
+		}
 		return (List<MarcaDTO>) repoJpa.findAll();
 	}
 
@@ -63,13 +71,13 @@ public class CursoSpringServiceImpl implements ICursoSpringService{
 	@Override
 	public String deleteMarca(Long idMarca) {
 		repoJpa.deleteById(idMarca);
-		return "OK";
+		return TRANSACCION_EXITOSA;
 	}
 
 	@Override
 	public String deleteMarcas() {
 		repoJpa.deleteAll();
-		return "OK";
+		return TRANSACCION_EXITOSA;
 	}
 	
 	// Using JDBC
