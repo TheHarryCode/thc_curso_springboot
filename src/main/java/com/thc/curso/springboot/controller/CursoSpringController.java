@@ -44,7 +44,6 @@ public class CursoSpringController {
 		return MarcaDTO.builder().idMarca(100L).nombreMarca("You successfully uploaded ").build();
 	}
 
-	//GET --> Obtener
 	@GetMapping("/getMarcas")
 	@ResponseStatus(HttpStatus.OK)
 	public List<MarcaDTO> getMarcas(@RequestHeader(value = "Autorizador", required = true) String token){
@@ -54,7 +53,7 @@ public class CursoSpringController {
 	@GetMapping("/getMarcasAll")
 	@ResponseStatus(HttpStatus.OK)
 	public List<MarcaDTO> getMarcasAll(){
-		LOGGER.log(Level.INFO,"Efecución getMarcasAll");
+		System.err.println("Estas en getMarcasAll");
 		return service.getMarcas("");
 	}
 
