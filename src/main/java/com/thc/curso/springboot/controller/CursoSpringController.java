@@ -1,11 +1,11 @@
 package com.thc.curso.springboot.controller;
 
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,26 +41,18 @@ public class CursoSpringController {
 	@PostMapping("/uploadFile")
 	@ResponseStatus(HttpStatus.CREATED)
 	public MarcaDTO uploadFile(@RequestParam("file") MultipartFile file) {
-		return MarcaDTO.builder().idMarca(100L).nombreMarca("You successfully uploaded ").build();
+		return MarcaDTO.builder().idMarca(1l).nombreMarca("You successfully uploaded ").build();
 	}
 
 	@GetMapping("/getMarcas")
 	@ResponseStatus(HttpStatus.OK)
-	public List<MarcaDTO> getMarcas(@RequestHeader(value = "Autorizador", required = true) String token){
+	public List<MarcaDTO> getMarcas(@RequestHeader(value = HttpHeaders.AUTHORIZATION, required= true) String token){
 		return service.getMarcas(token);
-	}
-
-	@GetMapping("/getMarcasAll")
-	@ResponseStatus(HttpStatus.OK)
-	public List<MarcaDTO> getMarcasAll(){
-		System.err.println("Estas en getMarcasAll");
-		return service.getMarcas("");
 	}
 
 	@GetMapping("/getMarcaxId/{idMarca}")
 	public ResponseEntity<MarcaDTO> getMarcaxId(@PathVariable Long idMarca){
 		service.getMarcaxId(idMarca);
-
 		return new ResponseEntity<>(new MarcaDTO(), HttpStatus.OK);
 	}
 
@@ -70,6 +62,14 @@ public class CursoSpringController {
 		return service.saveMarca(request);
 	}
 
+	@GetMapping("/getMarcasAll")
+	@ResponseStatus(HttpStatus.OK)
+	public List<MarcaDTO> getMarcasAll(@RequestParam("user") String user){
+		LOGGER.info("Estas en getMarcasAll");
+		LOGGER.info("user "+user);
+		return service.getMarcas("");
+	}
+	
 	@PostMapping("/saveAllMarcas")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseGeneric saveAll(@RequestBody RequestMarcas request) {

@@ -1,7 +1,5 @@
 package com.thc.curso.springboot.service;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,10 +28,6 @@ public class CursoSpringServiceImpl implements ICursoSpringService{
 
 	@Override
 	public List<MarcaDTO> getMarcas(String token) {
-		String tipoToken = "Beaver";
-		if(!token.contains(tipoToken)){
-			return Collections.emptyList();
-		}
 		return (List<MarcaDTO>) repoJpa.findAll();
 	}
 

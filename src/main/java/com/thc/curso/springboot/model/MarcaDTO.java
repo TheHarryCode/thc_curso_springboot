@@ -7,19 +7,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Where;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "MARCAS")
-@Where(clause = "creador = 'Harry'")
+//@Where(clause = "creador = 'Harry'")
 @Builder
 public class MarcaDTO {
 

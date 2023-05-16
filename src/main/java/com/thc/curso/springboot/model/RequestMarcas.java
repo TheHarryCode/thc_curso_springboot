@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestMarcas {
-
+	
 	//listado de marcas a insertar
 	private List<MarcaDTO> marcas;
 	
