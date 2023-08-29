@@ -46,7 +46,7 @@ public class CursoSpringController {
 
 	@GetMapping("/getMarcas")
 	@ResponseStatus(HttpStatus.OK)
-	public List<MarcaDTO> getMarcas(@RequestHeader(value = HttpHeaders.AUTHORIZATION, required= true) String token){
+	public List<MarcaDTO> getMarcas(@RequestHeader(value = HttpHeaders.AUTHORIZATION, required= false) String token){
 		return service.getMarcas(token);
 	}
 
