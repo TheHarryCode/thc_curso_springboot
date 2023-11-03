@@ -64,10 +64,17 @@ public class CursoSpringController {
 
 	@GetMapping("/getMarcasAll")
 	@ResponseStatus(HttpStatus.OK)
-	public List<MarcaDTO> getMarcasAll(@RequestParam("user") String user){
+	public List<MarcaDTO> getMarcasAll(){
 		LOGGER.info("Estas en getMarcasAll");
-		LOGGER.info("user "+user);
 		return service.getMarcas("");
+	}
+	
+	@GetMapping("/getMarcasAllxUser")
+	@ResponseStatus(HttpStatus.OK)
+	public List<MarcaDTO> getMarcasAllxUser(@RequestParam("user") String user){
+		LOGGER.info("Estas en getMarcasAllxUser");
+		LOGGER.info("user "+user);
+		return service.getMarcas(user);
 	}
 	
 	@PostMapping("/saveAllMarcas")
