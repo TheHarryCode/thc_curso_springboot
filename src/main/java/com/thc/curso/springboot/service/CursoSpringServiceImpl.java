@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.thc.curso.springboot.model.MarcaDTO;
+import com.thc.curso.springboot.model.PersonaDTO;
 import com.thc.curso.springboot.model.RequestMarcas;
 import com.thc.curso.springboot.model.ResponseGeneric;
 import com.thc.curso.springboot.persistence.ICursoSpringRepositoryJPA;
+import com.thc.curso.springboot.persistence.IPersonaRepositoryJPA;
 import com.thc.curso.springboot.repository.ICursoSpringRepositoryJDBC;
 
 @Service
@@ -26,6 +28,9 @@ public class CursoSpringServiceImpl implements ICursoSpringService{
 	@Autowired
 	ICursoSpringRepositoryJPA repoJpa;
 
+	@Autowired
+	IPersonaRepositoryJPA repoPersonaJpa;
+	
 	@Override
 	public List<MarcaDTO> getMarcas(String token) {
 		return (List<MarcaDTO>) repoJpa.findAll();
@@ -36,6 +41,17 @@ public class CursoSpringServiceImpl implements ICursoSpringService{
 		 Optional<MarcaDTO> optMarca = repoJpa.findById(idMarca);
 		 if(optMarca.isPresent()) {
 			 return optMarca.get();
+		 }else {
+			 return null;
+		 }
+	}
+	
+
+	@Override
+	public PersonaDTO getPersonaxId(Long idPersona) {
+		Optional<PersonaDTO> opt = repoPersonaJpa.findById(idPersona);
+		 if(opt.isPresent()) {
+			 return opt.get();
 		 }else {
 			 return null;
 		 }
@@ -73,6 +89,7 @@ public class CursoSpringServiceImpl implements ICursoSpringService{
 		repoJpa.deleteAll();
 		return TRANSACCION_EXITOSA;
 	}
+
 	
 	// Using JDBC
 
